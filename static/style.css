@@ -92,4 +92,34 @@ button:hover {
     z-index: -1;
     filter: brightness(40%) blur(2px); /* makes text easier to read */
 }
+/* ✨ Smooth message animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Optional glowing text for a futuristic look */
+.user-msg, .bot-msg {
+    text-shadow: 0 0 6px #66fcf1;
+    transition: all 0.3s ease;
+}
 
