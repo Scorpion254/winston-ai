@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 from bytez import Bytez
-
+import os
 app = Flask(__name__)
 
 # ✅ Bytez setup
-key = "b0158cc05479f10b8e76167236616626"
+key = os.getenv ("BYTEZ_API_KEY", "b0158cc05479f10b8e76167236616626")
 sdk = Bytez(key)
 model = sdk.model("openai/gpt-4o")
 
