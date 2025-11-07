@@ -122,4 +122,32 @@ button:hover {
     text-shadow: 0 0 6px #66fcf1;
     transition: all 0.3s ease;
 }
+/* 🟢 Typing animation */
+.typing span {
+    animation: blink 1.5s infinite;
+    font-weight: bold;
+}
+.typing span:nth-child(2) { animation-delay: 0.3s; }
+.typing span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes blink {
+    0%, 20%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* 🌀 Fade + Slide Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+.fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
