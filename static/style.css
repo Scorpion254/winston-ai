@@ -34,6 +34,7 @@ h1 {
     padding: 10px;
     border-radius: 8px;
     max-width: 80%;
+     text-shadow: 0 0 8px #66fcf1;
 }
 
 .user-msg {
@@ -49,7 +50,7 @@ h1 {
     border: 1px solid #45a29e;
     color: #66fcf1;
     text-align: left;
-}
+    }
 
 .input-area {
     display: flex;
