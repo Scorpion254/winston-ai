@@ -15,29 +15,59 @@
       </div>
   </div>
 
-  <script>
-      async function sendMessage() {
-          const input = document.getElementById("user-input");
-          const message = input.value.trim();
-          if (!message) return;
+<script>
+    async function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+        if (!message) return;
 
-          const chatBox = document.getElementById("chat-box");
-          chatBox.innerHTML += `<div class="user-msg">🧑 You: ${message}</div>`;
-          input.value = "";
+        const chatBox = document.getElementById("chat-box");
 
-          const response = await fetch("/chat", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message })
-          });
+        // Add user's message with animation
+        const userDiv = document.createElement("div");
+        userDiv.className = "user-msg fade-in-up";
+        userDiv.innerHTML = `🧑 You: ${message}`;
+        chatBox.appendChild(userDiv);
+        input.value = "";
 
-          const data = await response.json();
-          chatBox.innerHTML += `<div class="bot-msg">🤖 Winston AI: ${data.reply}</div>`;
-          chatBox.scrollTop = chatBox.scrollHeight;
-      }
+        // Auto scroll
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-      document.getElementById("user-input").addEventListener("keypress", (e) => {
-          if (e.key === "Enter") sendMessage();
-      });
-  </script>
+        // Show "thinking..." animation
+        const thinkingDiv = document.createElement("div");
+        thinkingDiv.className = "bot-msg fade-in";
+        thinkingDiv.innerHTML = "🤖 Winston AI is thinking...";
+        chatBox.appendChild(thinkingDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Fetch bot reply
+        try {
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+
+            // Remove thinking text
+            thinkingDiv.remove();
+
+            // Add animated bot reply
+            const botDiv = document.createElement("div");
+            botDiv.className = "bot-msg fade-in-up";
+            botDiv.innerHTML = `🤖 Winston AI: ${data.reply}`;
+            chatBox.appendChild(botDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (err) {
+            thinkingDiv.innerHTML = "⚠️ Connection error. Try again.";
+        }
+    }
+
+    // Allow Enter key to send
+    document.getElementById("user-input").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendMessage();
+    });
+</script>
+
 </body>
