@@ -1,12 +1,4 @@
-body {
-    background-color: transparent;
-    color: #c5c6c7;
-    font-family: "Segoe UI", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+
 
 .chat-container {
     width: 90%;
